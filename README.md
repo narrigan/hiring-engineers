@@ -15,18 +15,60 @@ Please provide screenshots and code snippets for all steps.
 
 You can utilize any OS/host that you would like to complete this exercise. However, we recommend one of the following approaches:
 
+>**ANSWER:** For this exercise I chose to spin up a blank ubuntu EC2 instance on AWS. For simplicity, I did not install the AWS integration as the intention of this assessment was to work with the agents, not the AWS integration.
+
 * You can spin up a fresh linux VM via Vagrant or other tools so that you don’t run into any OS or dependency issues. [Here are instructions](https://github.com/DataDog/hiring-engineers/blob/solutions-engineer/README.md#vagrant) for setting up a Vagrant Ubuntu VM. We strongly recommend using minimum `v. 16.04` to avoid dependency issues.
 * You can utilize a Containerized approach with Docker for Linux and our dockerized Datadog Agent image.
 
 Then, sign up for Datadog (use “Datadog Recruiting Candidate” in the “Company” field), get the Agent reporting metrics from your local machine.
+>**ANSWER:** Once the VM was provisioned I installed the DataDog agent on the Ubuntu box using the below command.
+DD_API_KEY=5b2274a00a64ceb64e64c289cf54f907 bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/datadog-agent/master/cmd/agent/install_script.sh)"
+
 
 ## Collecting Metrics:
 
 * Add tags in the Agent config file and show us a screenshot of your host and its tags on the Host Map page in Datadog.
+>**ANSWER:** Added tags to /etc/datadog-agent/datadog.yaml 
+<img src="https://farm8.staticflickr.com/7805/46610412914_a290ebc8cf_b.jpg" alt="Tags in the datadog.yaml"></a>
+
 * Install a database on your machine (MongoDB, MySQL, or PostgreSQL) and then install the respective Datadog integration for that database.
+>**ANSWER:** For the assessment I chose to install MySQL on the server 
+><img src="https://farm8.staticflickr.com/7888/47333853221_918209b93a_b.jpg" alt="Installing MySQL"></a>
+
+>Created a database called ‘ddog’ 
+><img src="https://farm8.staticflickr.com/7914/33458015878_575264cc30_o.png" alt="New ddgo DB"></a>
+
+>Created a table called customers and inserted some sample data
+><img src="https://farm8.staticflickr.com/7895/33458015708_952e35d556_b.jpg" alt="New Customer Table "></a>
+
+>Created DataDog user
+><img src="https://farm8.staticflickr.com/7899/33458015778_23bb422415_b.jpg" alt="DDog USer "></a>
+
+>Tested the New DataDog User has access to MySQL
+><img src="https://farm8.staticflickr.com/7876/47333865501_24630ee661_b.jpg" alt="DDog User Access "></a>
+
+>Granted the datadag MySQL user access required for metrics 
+><img src="https://farm8.staticflickr.com/7818/33458015658_501a4d4dd1_b.jpg" alt="DDog User Grants "></a>
+
+>Added /etc/datadog-agent/conf.d/mysql.d/mysql.yaml as per below
+><img src="https://farm8.staticflickr.com/7882/40368633543_9e68d72126_o.png" alt="DDog User Grants "></a>
+
+>Installed the MySQL integration via the DataDog GUI
+><img src="https://farm8.staticflickr.com/7926/47333881801_ae72721212_o.png" alt="MySQL GUI Installation"></a>
+
+>Restarted the DataDog-Agent and validated that the mysql check has passed
+><img src="https://farm8.staticflickr.com/7880/32391854607_5f250cebe5_b.jpg" alt="Agent Restart"></a>
+
+>MySQL data is now displaying in DataDog
+><img src="https://farm8.staticflickr.com/7898/47333881761_3f1eb1590d_b.jpg" alt="MySQL Dashboard"></a>
+
+
 * Create a custom Agent check that submits a metric named my_metric with a random value between 0 and 1000.
+>**ANSWER:** 
 * Change your check's collection interval so that it only submits the metric once every 45 seconds.
+>**ANSWER:** 
 * **Bonus Question** Can you change the collection interval without modifying the Python check file you created?
+>**ANSWER:** 
 
 ## Visualizing Data:
 
